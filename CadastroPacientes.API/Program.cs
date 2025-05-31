@@ -11,6 +11,7 @@ builder.Services.AddSingleton<DbConnectionFactory>();
 // registra o repositório Dapper
 builder.Services.AddScoped<IPacienteRepository, PacienteRepository>();
 builder.Services.AddScoped<PacienteService>();
+builder.Services.AddScoped<IConvenioRepository, ConvenioRepository>();
 
 
 // adiciona controllers e swagger
