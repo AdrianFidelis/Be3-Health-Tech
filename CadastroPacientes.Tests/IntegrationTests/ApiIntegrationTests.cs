@@ -11,7 +11,6 @@ using System.Text;
 using CadastroPacientes.API;
 using CadastroPacientes.Application.DTOs;
 using CadastroPacientes.Domain.Enums;
-using Microsoft.VisualStudio.TestPlatform.TestHost;
 
 namespace CadastroPacientes.Tests.IntegrationTests
 {
@@ -44,20 +43,31 @@ namespace CadastroPacientes.Tests.IntegrationTests
                 NumeroCarteirinha = "INT123",
                 ValidadeCarteirinha = "12/2026"
             };
-            var jsonContent = new StringContent(JsonSerializer.Serialize(createDto), Encoding.UTF8, "application/json");
+            var jsonContent = new StringContent(
+                JsonSerializer.Serialize(createDto),
+                Encoding.UTF8,
+                "application/json");
 
             var postResponse = await _client.PostAsync("/api/paciente", jsonContent);
             postResponse.StatusCode.Should().Be(System.Net.HttpStatusCode.Created);
 
             // Extrair ID retornado
             var postBody = await postResponse.Content.ReadAsStringAsync();
-            using var doc = JsonDocument.Parse(postBody);
-            var novoId = doc.RootElement.GetProperty("id").GetGuid();
+            using var postDoc = JsonDocument.Parse(postBody);
+            var novoId = postDoc.RootElement.GetProperty("id").GetGuid();
 
             // 2) GET por ID
             var getResponse = await _client.GetAsync($"/api/paciente/{novoId}");
             getResponse.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
             var getBody = await getResponse.Content.ReadAsStringAsync();
+
+            // ==== OPÇÃO A: Comparar valor numérico do enum ====
+            using var getDoc = JsonDocument.Parse(getBody);
+            // Lê o campo "genero" como inteiro
+            int generoNoJson = getDoc.RootElement.GetProperty("genero").GetInt32();
+            generoNoJson.Should().Be((int)Genero.Outro);
+
+            // Também verificar se o nome está presente no JSON
             getBody.Should().Contain("Integracao");
 
             // 3) DELETE/inativar paciente
