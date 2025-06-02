@@ -23,7 +23,6 @@ export class ListarPacientesComponent implements OnInit {
     this.loading = true;
     this.pacientesService.listar().subscribe({
       next: (res) => {
-        console.log('Pacientes recebidos:', res);
         this.pacientes = res;
         this.loading = false;
       },
