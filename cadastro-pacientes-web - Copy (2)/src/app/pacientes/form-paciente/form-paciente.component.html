@@ -1,0 +1,108 @@
+<div class="container mt-4">
+  <h2>{{ id ? 'Editar' : 'Novo' }} Paciente</h2>
+
+  <!-- Mensagem de erro geral do backend -->
+  <div *ngIf="mensagemErro" class="alert alert-danger mt-2" role="alert">
+    {{ mensagemErro }}
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="salvar()">
+    <div class="row">
+
+      <div class="col-md-6 mb-3">
+        <label for="nome">Nome</label>
+        <input id="nome" formControlName="nome" class="form-control"
+               required [class.is-invalid]="form.get('nome')?.invalid && form.get('nome')?.touched">
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label for="sobrenome">Sobrenome</label>
+        <input id="sobrenome" formControlName="sobrenome" class="form-control"
+               required [class.is-invalid]="form.get('sobrenome')?.invalid && form.get('sobrenome')?.touched">
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <label for="dataNascimento">Data de Nascimento</label>
+        <input id="dataNascimento" formControlName="dataNascimento" type="date" class="form-control"
+               required [class.is-invalid]="form.get('dataNascimento')?.invalid && form.get('dataNascimento')?.touched">
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <label for="genero">Gênero</label>
+        <select id="genero" formControlName="genero" class="form-control" required>
+          <option [value]="0">Outro</option>
+          <option [value]="1">Feminino</option>
+          <option [value]="2">Masculino</option>
+        </select>
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <label for="cpf">CPF</label>
+        <input id="cpf" formControlName="cpf" class="form-control" mask="000.000.000-00"[class.is-invalid]="form.get('cpf')?.invalid && form.get('cpf')?.touched">
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <label for="rg">RG</label>
+        <input id="rg" formControlName="rg" class="form-control"
+               required [class.is-invalid]="form.get('rg')?.invalid && form.get('rg')?.touched">
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <label>UF RG</label>
+        <select formControlName="ufRg" class="form-control" required>
+          <option value="" disabled>Selecione</option>
+          <option *ngFor="let uf of ufs" [value]="uf.valor">{{ uf.sigla }}</option>
+        </select>
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <label for="email">Email</label>
+        <input id="email" formControlName="email" class="form-control"
+               required type="email"
+               [class.is-invalid]="form.get('email')?.invalid && form.get('email')?.touched">
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <label for="celular">Celular</label>
+        <input id="celular" formControlName="celular" class="form-control"
+               mask="(00) 00000-0000"
+               [class.is-invalid]="form.hasError('peloMenosUmTelefone') && (form.get('celular')?.touched || form.get('telefoneFixo')?.touched)">
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <label for="telefoneFixo">Telefone Fixo</label>
+        <input id="telefoneFixo" formControlName="telefoneFixo" class="form-control"
+               mask="(00) 0000-0000"
+               [class.is-invalid]="form.hasError('peloMenosUmTelefone') && (form.get('celular')?.touched || form.get('telefoneFixo')?.touched)">
+      </div>
+
+      <!-- Validação customizada para pelo menos um telefone -->
+      <div *ngIf="form.hasError('peloMenosUmTelefone') && (form.get('celular')?.touched || form.get('telefoneFixo')?.touched)"
+           class="alert alert-danger w-100">
+        Preencha pelo menos um telefone (celular ou fixo)!
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <label for="convenioId">Convênio</label>
+        <select id="convenioId" formControlName="convenioId" class="form-control" required>
+          <option value="" disabled>Selecione</option>
+          <option *ngFor="let c of convenios" [value]="c.id">{{ c.nome }}</option>
+        </select>
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <label for="numeroCarteirinha">Número da carteirinha</label>
+        <input id="numeroCarteirinha" formControlName="numeroCarteirinha" class="form-control"
+               required [class.is-invalid]="form.get('numeroCarteirinha')?.invalid && form.get('numeroCarteirinha')?.touched">
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <label for="validadeCarteirinha">Validade da carteirinha</label>
+        <input id="validadeCarteirinha" formControlName="validadeCarteirinha" class="form-control"
+               required type="month">
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-success" [disabled]="form.invalid">Salvar</button>
+  </form>
+</div>
