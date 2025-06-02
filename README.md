@@ -5,7 +5,7 @@ Este projeto é uma aplicação completa para cadastro de pacientes, desenvolvid
 
 ---
 
-## 🏗️ Arquitetura Utilizada
+## Arquitetura Utilizada
 
 - **Backend:** .NET 8, REST API, Dapper, SQL Server
 - **Frontend:** Angular 15, Bootstrap, ngx-mask
@@ -21,7 +21,7 @@ Este projeto é uma aplicação completa para cadastro de pacientes, desenvolvid
 
 ---
 
-## 🚀 Instruções de Instalação e Execução
+## Instruções de Instalação e Execução
 
 ### 1. Clone o repositório
 
@@ -122,7 +122,7 @@ ng serve
 
 ---
 
-## 🎯 Funcionalidades Implementadas
+## Funcionalidades Implementadas
 
 - Cadastro, edição e exclusão de pacientes
 - Validação dos dados conforme regras de negócio (CPF, e-mail, telefones)
@@ -132,7 +132,7 @@ ng serve
 
 ---
 
-## 🧩 Observações e Requisitos
+## Observações e Requisitos
 
 - O campo CPF **não é obrigatório**, mas se preenchido deve seguir o formato `000.000.000-00`
 - Pelo menos um telefone (fixo ou celular) deve ser preenchido
@@ -141,14 +141,14 @@ ng serve
 
 ---
 
-## 👨‍💻 Autor
+## Autor
 
 Adrian Soares Fidelis  
 [LinkedIn](https://www.linkedin.com/in/adrianfidelis/) — [GitHub](https://github.com/AdrianFidelis)
 
 ---
 
-## 📜 Licença
+## Licença
 
 Este projeto é de uso acadêmico/desafio técnico. Consulte o autor para reutilização comercial.
 
