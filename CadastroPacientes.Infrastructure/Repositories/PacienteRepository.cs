@@ -81,7 +81,7 @@ namespace CadastroPacientes.Infrastructure.Repositories
         public async Task<bool> ExisteCpfAsync(string cpf)
         {
             using var conn = _factory.CreateConnection();
-            const string sql = "SELECT COUNT(1) FROM Pacientes WHERE CPF = @CPF AND Ativo = 1";
+            const string sql = "SELECT COUNT(1) FROM Pacientes WHERE CPF = @CPF";
             var count = await conn.ExecuteScalarAsync<int>(sql, new { CPF = cpf });
             return count > 0;
         }
