@@ -21,14 +21,14 @@ namespace CadastroPacientes.Infrastructure.Repositories
         public async Task<IEnumerable<Paciente>> ListarAsync()
         {
             using var conn = _factory.CreateConnection();
-            const string sql = "SELECT * FROM Pacientes WHERE Ativo = 1";
+            const string sql = "SELECT * FROM Pacientes";
             return await conn.QueryAsync<Paciente>(sql);
         }
 
         public async Task<Paciente?> ObterPorIdAsync(Guid id)
         {
             using var conn = _factory.CreateConnection();
-            const string sql = "SELECT * FROM Pacientes WHERE Id = @Id AND Ativo = 1";
+            const string sql = "SELECT * FROM Pacientes WHERE Id = @Id";
             return await conn.QueryFirstOrDefaultAsync<Paciente>(sql, new { Id = id });
         }
 

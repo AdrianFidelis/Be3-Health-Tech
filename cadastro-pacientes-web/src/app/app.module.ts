@@ -15,6 +15,7 @@ import { AppComponent } from './app.component';
     HttpClientModule,
     ReactiveFormsModule,
     NgxMaskModule.forRoot()
+
   ],
   providers: [],
   bootstrap: [AppComponent]

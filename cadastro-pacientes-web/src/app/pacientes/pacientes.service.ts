@@ -2,25 +2,49 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+export interface Paciente {
+  id?: number;
+  nome: string;
+  sobrenome: string;
+  dataNascimento: string;
+  genero: string;
+  cpf?: string;
+  rg: string;
+  ufRg: string;
+  email: string;
+  celular: string;
+  telefoneFixo?: string;
+  convenioId: number;
+  numeroCarteirinha: string;
+  validadeCarteirinha: string; // "yyyy-MM"
+  ativo?: boolean;
+}
+
 @Injectable({ providedIn: 'root' })
 export class PacientesService {
-  private apiUrl = 'http://localhost:5000/api/pacientes'; // AJUSTE para o endereço da sua API!
+  private apiUrl = 'https://localhost:7139/api/Paciente';
+  //private apiUrl = 'http://localhost:5087/api/Paciente';
+
 
   constructor(private http: HttpClient) {}
 
-  listar(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+  listar(): Observable<Paciente[]> {
+    return this.http.get<Paciente[]>(this.apiUrl);
   }
-  buscarPorId(id: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${id}`);
+
+  buscarPorId(id: string): Observable<Paciente> {
+    return this.http.get<Paciente>(`${this.apiUrl}/${id}`);
   }
-  criar(paciente: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, paciente);
+
+  criar(paciente: Paciente): Observable<Paciente> {
+    return this.http.post<Paciente>(this.apiUrl, paciente);
   }
-  atualizar(id: number, paciente: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/${id}`, paciente);
+
+  atualizar(id: string, paciente: Paciente): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}/${id}`, paciente);
   }
-  inativar(id: number): Observable<any> {
-    return this.http.patch<any>(`${this.apiUrl}/${id}/inativar`, {});
+
+  inativar(id: string): Observable<void> {
+    return this.http.patch<void>(`${this.apiUrl}/${id}/inativar`, {});
   }
 }

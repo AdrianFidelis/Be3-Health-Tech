@@ -1,11 +1,20 @@
 <div class="container mt-4">
   <h2>Pacientes</h2>
-  <a routerLink="/pacientes/novo" class="btn btn-primary mb-3">Novo Paciente</a>
-  <table class="table">
+  <button class="btn btn-primary mb-2" routerLink="/pacientes/novo">Novo Paciente</button>
+
+  <!-- Loading Spinner -->
+  <div *ngIf="loading">Carregando...</div>
+
+  <!-- Tabela de Pacientes -->
+  <table class="table table-bordered table-striped" *ngIf="!loading && pacientes.length > 0">
     <thead>
       <tr>
         <th>Nome</th>
         <th>Sobrenome</th>
+        <th>Data Nasc.</th>
+        <th>Gênero</th>
+        <th>CPF</th>
+        <th>Convênio</th>
         <th>Status</th>
         <th>Ações</th>
       </tr>
@@ -14,11 +23,42 @@
       <tr *ngFor="let p of pacientes">
         <td>{{ p.nome }}</td>
         <td>{{ p.sobrenome }}</td>
-        <td>{{ p.ativo ? 'Ativo' : 'Inativo' }}</td>
+        <td>{{ p.dataNascimento | date:'dd/MM/yyyy' }}</td>
         <td>
-          <a [routerLink]="['/pacientes/editar', p.id]" class="btn btn-sm btn-warning">Editar</a>
+          {{ p.genero === 1 ? 'Feminino' : (p.genero === 2 ? 'Masculino' : 'Outro') }}
+        </td>
+        <td>{{ p.cpf }}</td>
+        <td>
+          <!-- Exibe o ID ou nome do convênio se trouxer do backend -->
+          {{ p.convenioNome || p.convenioId }}
+        </td>
+        <td>
+          <span [class.text-success]="p.ativo" [class.text-danger]="!p.ativo">
+            {{ p.ativo ? 'Ativo' : 'Inativo' }}
+          </span>
+        </td>
+        <td>
+          <button class="btn btn-sm btn-info me-1" (click)="editar(p.id)">Editar</button>
+
+          <!-- Botão inativar -->
+          <button *ngIf="p.ativo"
+                  class="btn btn-sm btn-danger"
+                  (click)="inativar(p)">
+            Inativar
+          </button>
+          <!-- Botão ativar -->
+          <button *ngIf="!p.ativo"
+                  class="btn btn-sm btn-success"
+                  (click)="ativar(p)">
+            Ativar
+          </button>
         </td>
       </tr>
     </tbody>
   </table>
+
+  <!-- Nenhum paciente cadastrado -->
+  <div *ngIf="!loading && pacientes.length === 0" class="alert alert-info">
+    Nenhum paciente cadastrado.
+  </div>
 </div>

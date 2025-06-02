@@ -4,6 +4,7 @@ import { PacientesRoutingModule } from './pacientes-routing.module';
 import { ListarPacientesComponent } from './listar-pacientes/listar-pacientes.component';
 import { FormPacienteComponent } from './form-paciente/form-paciente.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgxMaskModule } from 'ngx-mask'; // <-- importação da máscara
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     PacientesRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxMaskModule.forChild()
   ]
 })
 export class PacientesModule { }
