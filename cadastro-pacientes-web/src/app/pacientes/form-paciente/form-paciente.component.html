@@ -1,0 +1,13 @@
+<div class="container mt-4">
+  <h2>{{ id ? 'Editar' : 'Novo' }} Paciente</h2>
+  <form [formGroup]="form" (ngSubmit)="salvar()">
+    <div class="mb-3">
+      <input formControlName="nome" class="form-control" placeholder="Nome" required>
+    </div>
+    <div class="mb-3">
+      <input formControlName="sobrenome" class="form-control" placeholder="Sobrenome" required>
+    </div>
+    <!-- Continue para outros campos -->
+    <button type="submit" class="btn btn-success">Salvar</button>
+  </form>
+</div>

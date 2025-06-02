@@ -1,0 +1,24 @@
+<div class="container mt-4">
+  <h2>Pacientes</h2>
+  <a routerLink="/pacientes/novo" class="btn btn-primary mb-3">Novo Paciente</a>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Sobrenome</th>
+        <th>Status</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of pacientes">
+        <td>{{ p.nome }}</td>
+        <td>{{ p.sobrenome }}</td>
+        <td>{{ p.ativo ? 'Ativo' : 'Inativo' }}</td>
+        <td>
+          <a [routerLink]="['/pacientes/editar', p.id]" class="btn btn-sm btn-warning">Editar</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
