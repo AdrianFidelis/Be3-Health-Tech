@@ -1,7 +1,7 @@
 
-# Be3 Health Tech — Cadastro de Pacientes
+# Cadastro de Pacientes - .Net + ANgulas
 
-Este projeto é uma aplicação completa para cadastro de pacientes, desenvolvida para o desafio técnico da Be3 Health Tech, incluindo **backend (.NET 8 + SQL Server)** e **frontend (Angular 15)**.
+Este projeto é uma aplicação completa para cadastro de pacientes, desenvolvida para o desafio técnico, incluindo **backend (.NET 8 + SQL Server)** e **frontend (Angular 15)**.
 
 ---
 
